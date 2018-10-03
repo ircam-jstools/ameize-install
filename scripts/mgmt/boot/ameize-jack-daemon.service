@@ -1,0 +1,15 @@
+[Unit]
+Description=Execute jack
+After=sound.target
+Type=simple
+
+[Service]
+ExecStart=/home/pi/ameize/mgmt/boot/ameize-jack-daemon.sh
+WorkingDirectory=/home/pi/ameize/mgmt/boot
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# run in script directory
+cd "$(dirname "$0")"
+
+source _globals.sh
+
+
+log "Setup and configuration options"
+
+# PASSWORD
+echo "> Update password (type new password twice):"
+sudo passwd
+
+# CONFIGURE HOSTNAME
+echo ""
+echo "> Choose device hostname (ex: \"ameize-42\"):"
+read target_hostname
+echo "> chosen hostname: \"${target_hostname}\""
+
+# CONFIGURE SNDCARD
+soundcards=("audioinjector" "hifiberry" "raspiaudio" "usb" "none")
+
+echo ""
+echo '> Choose the soundcard to be installed. Choose "none" for internal soundcard. '
+select target_sndcard in "${soundcards[@]}"
+do
+    case $target_sndcard in
+        "audioinjector")
+            echo "> chosen soundcard: \"${target_sndcard}\""
+            break;
+            ;;
+        "hifiberry")
+            echo "> chosen soundcard: \"${target_sndcard}\""
+            break;
+            ;;
+        "raspiaudio")
+            echo "> chosen soundcard: \"${target_sndcard}\""
+            break;
+            ;;
+        "usb")
+            echo "> chosen soundcard: \"${target_sndcard}\""
+            break;
+            ;;
+        "none")
+            echo "> chosen soundcard: \"${target_sndcard}\""
+            break;
+            ;;
+        *) echo "invalid option $reply";;
+    esac
+done
+
+# RECAP CHOSEN CONFIG AND CONFIRM
+log "Chosen configuration options:
+- hostname: \"${target_hostname}\"
+- soundcard: \"${target_sndcard}\""
+
+while true; do
+    read -p "> Continue (y/n)? " yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "> Please answer \"y\" or \"n\".";;
+    esac
+done
+
+log "Installing device with following configuration:
+- hostname: \"${target_hostname}\"
+- soundcard: \"${target_sndcard}\"
+
+*** Warning: installation may take some time and device may reboot multiple times ***"
+
+mkdir -p /home/pi/apps
+mkdir -p /home/pi/lib
+
+(source ./prepare-system.sh)
+(source ./install-soundcard.sh)
+(source ./install-jack.sh)
+(source ./install-ameize-client.sh)
+(source ./install-services.sh)
+(source ./change-hostname.sh)
+
+log "Rebooting system. Device will now be accessible at \"${target_hostname}.local\"."
+
+sync # flush files to finalize writting
+sudo reboot now
