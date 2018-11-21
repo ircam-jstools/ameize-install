@@ -1,8 +1,8 @@
 [Unit]
 Description=Launch the ameize client daemon
-Type=idle
 
 [Service]
+Type=idle
 ExecStart=/home/pi/ameize/mgmt/boot/ameize-client-daemon.sh
 WorkingDirectory=/home/pi/ameize/mgmt/boot
 StandardOutput=inherit

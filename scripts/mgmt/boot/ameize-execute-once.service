@@ -1,13 +1,13 @@
 [Unit]
-Description=Execute a shell script on boot is exists
-Type=idle
+Description=Execute a shell script on boot if it exists
 
 [Service]
+Type=oneshot
 ExecStart=/home/pi/ameize/mgmt/boot/ameize-execute-once.sh
 WorkingDirectory=/home/pi/ameize/mgmt/boot
 StandardOutput=inherit
 StandardError=inherit
-Restart=always
+Restart=no
 User=pi
 
 [Install]
