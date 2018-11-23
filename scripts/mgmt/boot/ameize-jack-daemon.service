@@ -10,6 +10,10 @@ StandardOutput=inherit
 StandardError=inherit
 Restart=always
 User=pi
+Group=audio
+LimitMEMLOCK=infinity
+LimitRTPRIO=75
+LimitNICE=-19
 
 [Install]
 WantedBy=multi-user.target

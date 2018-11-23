@@ -14,5 +14,6 @@ sudo ./waf install
 sudo ldconfig
 sudo sh -c "echo @audio - memlock 256000 >> /etc/security/limits.conf"
 sudo sh -c "echo @audio - rtprio 75 >> /etc/security/limits.conf"
+sudo sh -c "echo @audio - nice -19 >> /etc/security/limits.conf"
 
 cd "$old_pwd"
