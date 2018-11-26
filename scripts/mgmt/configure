@@ -10,7 +10,7 @@ log "Setup and configuration options"
 
 # PASSWORD
 echo "> Update password (type new password twice):"
-sudo passwd
+sudo passwd $default_user
 
 # CONFIGURE HOSTNAME
 echo ""
