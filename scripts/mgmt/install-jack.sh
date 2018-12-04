@@ -4,7 +4,7 @@ log "Installing jack"
 
 old_pwd="$(pwd)"
 
-sudo apt-get install -y libasound2-dev libsndfile1-dev libreadline-dev libreadline6-dev libtinfo-dev
+sudo apt-get install -y libasound2-dev libsndfile1-dev libreadline-dev libreadline6-dev libtinfo-dev libsystemd-dev libsamplerate-dev libdb-dev
 cd /home/pi/lib
 git clone https://github.com/jackaudio/jack2.git --depth 1
 cd jack2
